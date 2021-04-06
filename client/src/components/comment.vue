@@ -32,7 +32,6 @@
     <div>
       <button type="submit" class="btn btn-primary mt-3" @click.prevent="addReply(id)">Add Reply</button>
       <button type="submit" class="btn btn-outline-danger mt-3 ms-2" @click.prevent="changeIsReply">Cancel</button>
-      <p style="color:red" class="mt-2"> {{errorReply}} </p>
     </div>
   </div>
   <div v-for="reply in initialReplies" :key="reply._id">
@@ -135,9 +134,17 @@ export default {
 
     addReply (commentId) {
       if (this.name === '') {
-        this.errorReply = 'Name cannot be Empty'
+        Swal.fire({
+          icon: 'error',
+          title: 'FAIL',
+          text: 'Name cannot be empty'
+        })
       } else if (this.newReply === '') {
-        this.errorReply = 'Reply cannot be Empty'
+        Swal.fire({
+          icon: 'error',
+          title: 'FAIL',
+          text: 'Reply cannot be empty'
+        })
       } else {
         axios({
           url: 'http://localhost:3000/replies/' + commentId,

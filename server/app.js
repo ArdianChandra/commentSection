@@ -3,7 +3,7 @@ const { connect } = require('./config/mongodb')
 const router = require('./routers/index')
 const errorHandler = require('./helper/errorHandling')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const cors = require('cors')
 
 connect().then((database) => {
